@@ -4,7 +4,7 @@ from sqlalchemy import asc
 from app.forms import ClassForm #EmptyForm
 from app.models import Zoom
 from datetime import datetime
-from .util import get_closest
+from .util import get_closest, add_time
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -42,7 +42,7 @@ def json_class_view():
     for one in get_closest(Zoom.query.all()):
         classes[one.class_name] = [
             dict(class_link = one.class_link,
-                 start_time = one.start_time
+                 start_time = add_time(one.start_time)
                  )
         ]
     return jsonify(classes)

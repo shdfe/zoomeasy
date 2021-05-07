@@ -31,14 +31,18 @@
                     return response.json();
                 }).then(function (text) {
                     closestClass =  text[Object.keys(text)[0]];
-                    var date = new Date(closestClass[0]['start_time']);
+                    var date = new Date((closestClass[0]['start_time']));
+                    
                     if (date.getFullYear() === curTime.getFullYear() &&
                         date.getMonth() === curTime.getMonth() &&
                         date.getDate() === curTime.getDate() &&
                         date.getDay() === curTime.getDay() &&
                         date.getHours() === curTime.getHours() &&
-                        date.getMinutes() - curTime.getMinutes() <= 5) {
+                        date.getMinutes() - curTime.getMinutes() <= 5 &&
+                        date.getMinutes() - curTime.getMinutes() >= 0) {
                             window.location.href = closestClass[0]['class_link'];
+                            // window.open(closestClass[0]['class_link'], '_blank')
+                            window.open('https://google.com', '_blank')
                         }
                 });
 
