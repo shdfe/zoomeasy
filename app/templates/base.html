@@ -23,7 +23,7 @@
     <script>
         
         setInterval(() => {
-            let closestClass;
+            var closestClass;
             
             var curTime = new Date();
             fetch('/json_class_view')
@@ -31,16 +31,17 @@
                     return response.json();
                 }).then(function (text) {
                     closestClass =  text[Object.keys(text)[0]];
+                    var date = new Date(closestClass[0]['start_time']);
+                    if (date.getFullYear() === curTime.getFullYear() &&
+                        date.getMonth() === curTime.getMonth() &&
+                        date.getDate() === curTime.getDate() &&
+                        date.getDay() === curTime.getDay() &&
+                        date.getHours() === curTime.getHours() &&
+                        date.getMinutes() - curTime.getMinutes() <= 5) {
+                            window.location.href = closestClass[0]['class_link'];
+                        }
                 });
-            let date = new Date(closestClass[0].start_time);
-            if (date.getFullYear() === curTime.getFullYear() &&
-                date.getMonth() === curTime.getMonth() &&
-                date.getDate() === curTime.getDate() &&
-                date.getDay() === curTime.getDay() &&
-                date.getHours() === curTime.getHours() &&
-                date.getMinutes() - curTime.getMinutes() <= 5) {
-                    window.location.href = closestClass[0].class_link;
-                }
+
 
             
         }, 1000);
