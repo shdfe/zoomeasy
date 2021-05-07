@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <style>
+        /*make a calendar in JS and feed it python caledar data (XHR)*/ 
+        a.button {
+            -webkit-appearance: button;
+            -moz-appearance: button;
+            appearance: button;
+
+            text-decoration: none;
+            color: initial;
+        }
+        
+    </style>
+</head>
+{% block app_content %}
+<body>
+
+    {% for class in classes %}
+        {% include '_class.html' %}
+    {% endfor %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+        <span style="color: red;">{{ message }}</span><br>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    
+</body>
+{% endblock %}
+
+</html>

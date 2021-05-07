@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% block styles %}
+        {{ bootstrap.load_css() }}
+    {% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Zoomeasy</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('classes') }}">Classes</a>
+            </li>
+        </ul>
+    </nav>
+    <br>
+    {% block app_content %}{% endblock %}
+    <script>
+        
+        setInterval(() => {
+            let closestClass;
+            
+            var curTime = new Date();
+            fetch('/json_class_view')
+                .then(function (response) {
+                    return response.json();
+                }).then(function (text) {
+                    closestClass =  text[Object.keys(text)[0]];
+                });
+            let date = new Date(closestClass[0].start_time);
+            if (date.getFullYear() === curTime.getFullYear() &&
+                date.getMonth() === curTime.getMonth() &&
+                date.getDate() === curTime.getDate() &&
+                date.getDay() === curTime.getDay() &&
+                date.getHours() === curTime.getHours() &&
+                date.getMinutes() - curTime.getMinutes() <= 5) {
+                    window.location.href = closestClass[0].class_link;
+                }
+
+            
+        }, 1000);
+
+            
+    </script>
+</body>
+</html>
