@@ -21,15 +21,14 @@
     <br>
     {% block app_content %}{% endblock %}
     <script>
-        
         setInterval(() => {
             var closestClass;
             
             var curTime = new Date();
             fetch('/json_class_view')
-                .then(function (res) {
+                .then((res) => {
                     return res.json();
-                }).then(function (text) {
+                }).then((text) => {
                     closestClass =  text[Object.keys(text)[0]];
                     var date = new Date((closestClass[0]['start_time']));
                     

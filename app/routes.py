@@ -15,26 +15,11 @@ def index():
         db.session.commit()
         flash('Good to go!')
         return redirect(url_for('index'))
-    
-        #classes = Zoom.query.all() 
-            #w = Zoom.query.filter_by(class_time = current_time + 5min)
 
-        #while classes length !=0:
-            #w = Zoom.query.filter_by(class_time = current_time + 5min)
-            #if w.first() is none:
-                #if hour == curr_hour and zoom table.time.desc()[0].minutes % 10 == 0:
-                    #set timeout for (curr_min-5)*60 seconds? time sleep
-            #else:
-                #do the go() function
         
     return render_template('index.html', form=form)
 
-# @app.route('/wait', methods=['GET', 'POST'])
-# def wait():
-#     classes = Zoom.query.all()
-#     if classes:
-        
-#     flash("No Classes :(")
+
     
 @app.route('/json_class_view', methods=['GET'])
 def json_class_view():
@@ -55,12 +40,3 @@ def classes():
         # return redirect(url_for('index'))
     return render_template('classes.html', classes=classes)
 
-
-    
-
-# @app.route('/delete/<id>')
-# def delete(id):
-#     one = Zoom.query.filter_by(id=int(id)).first()
-#     db.session.delete(one)
-#     db.session.commit()
-#     return redirect(url_for('index'))

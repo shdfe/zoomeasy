@@ -14,6 +14,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI'
 app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'Flatly'
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'Sheel-thinks-chocolate-is-good'
 db = SQLAlchemy(app)
+app.config['JSON_SORT_KEYS'] = False
 bootstrap = Bootstrap(app)
 migrate = flask_migrate.Migrate(app, db)
 db.create_all()
