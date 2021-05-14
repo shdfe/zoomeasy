@@ -48,6 +48,6 @@ def classes():
     classes = sort_by_oldest(Zoom.query.all())
     if bool(classes) == False:
         flash("No classes found :(")
-        # return redirect(url_for('index'))
+
     return render_template('classes.html', classes=classes)
 
