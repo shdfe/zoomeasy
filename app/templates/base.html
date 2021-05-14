@@ -23,25 +23,37 @@
     <script>
         setInterval(() => {
             var closestClass;
-            
-            var curTime = new Date();
-            fetch('/json_class_view')
-                .then((res) => {
-                    return res.json();
-                }).then((text) => {
-                    closestClass =  text[Object.keys(text)[0]];
-                    var date = new Date((closestClass[0]['start_time']));
-                    
-                    if (date.getFullYear() === curTime.getFullYear() &&
+            function canGoToClass(date) {
+                return date.getFullYear() === curTime.getFullYear() &&
                         date.getMonth() === curTime.getMonth() &&
                         date.getDate() === curTime.getDate() &&
                         date.getDay() === curTime.getDay() &&
                         date.getHours() === curTime.getHours() &&
                         date.getMinutes() - curTime.getMinutes() <= 5 &&
-                        date.getMinutes() - curTime.getMinutes() >= 0) {
-                            window.location.href = closestClass[0]['class_link'];
+                        date.getMinutes() - curTime.getMinutes() >= 0
+            }
+            var curTime = new Date();
+            fetch('/json_class_view')
+                .then((res) => {
+                    return res.json();
+                }).then((text) => {
+                    console.log(text);
+                    closestClass =  text[Object.keys(text)[0]];
+                    var date = new Date((closestClass[0]['start_time']));
+                    
+                    if (canGoToClass(date)) {
                             // window.open(closestClass[0]['class_link'], '_blank')
-                            window.open('https://google.com', '_blank')
+                            
+                            var yon = prompt("Time to go to class! (y/n)")
+                            switch (yon) {
+                                case 'y':
+                                    var miwindow = window.open(closestClass[0]['class_link'], "_blank");
+                                    miwindow.write("<h1>GOOD LUCK IN CLASS</h1>")
+                                default:
+                                    break;
+                            }
+
+                        //add classdone prperty
                         }
                 });
 

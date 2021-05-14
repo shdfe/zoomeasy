@@ -6,6 +6,7 @@ class Zoom(db.Model):
     class_link = db.Column(db.String(50))
     class_name = db.Column(db.String(50))
     start_time = db.Column(db.DateTime, default=datetime.utcnow())
+    done = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return f'Zoom {self.class_name}'

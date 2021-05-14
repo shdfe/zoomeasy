@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 import os
 import flask_migrate
+from flask_socketio import SocketIO
 from .util import get_closest
 
 app = Flask(__name__)
@@ -12,6 +13,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI') or 'sqlite:///' + os.path.join(basedir, 'app.db')
 app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'Flatly'
+socketio = SocketIO(app)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'xxxxxxxxxxxxxxxxxxxxxxxxxxx'
 db = SQLAlchemy(app)
 app.config['JSON_SORT_KEYS'] = False
