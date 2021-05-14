@@ -37,6 +37,8 @@ def done():
     class_name = request.args.get('className', None)
     if class_name:
         the_class = Zoom.query.filter_by(class_name=class_name).first()
+        the_class.done = True
+        db.session.commit()
     return redirect(url_for('index'))
 
 
