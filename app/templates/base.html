@@ -47,8 +47,17 @@
                             var yon = prompt("Time to go to class! (y/n)")
                             switch (yon) {
                                 case 'y':
-                                    var miwindow = window.open(closestClass[0]['class_link'], "_blank");
-                                    miwindow.write("<h1>GOOD LUCK IN CLASS</h1>")
+                                    //if done===true then stop
+                                    if (closestClass[0]['done'] === false) {
+                                        var miwindow = window.open(closestClass[0]['class_link'], "_blank");
+                                        var xhttp = new XMLHttpRequest();
+                                        xhttp.open("POST", "/done?", true);
+                                        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                        xhttp.send(`className=${closestClass[0]['done']}`)
+                                        break;
+                                    }
+                                    
+                                    // miwindow.write("<h1>GOOD LUCK IN CLASS</h1>")
                                 default:
                                     break;
                             }

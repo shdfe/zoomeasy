@@ -10,7 +10,7 @@ from .util import get_closest, add_time, sort_by_oldest
 def index():
     form = ClassForm()
     if form.validate_on_submit():
-        zoom = Zoom(class_link=form.class_link.data, class_name=form.class_name.data, start_time=form.start_time.data)
+        zoom = Zoom(class_link=form.class_link.data, class_name=form.class_name.data, start_time=form.start_time.data, done=False)
         db.session.add(zoom)
         db.session.commit()
         flash('Good to go!')
@@ -27,12 +27,13 @@ def json_class_view():
     for one in get_closest(Zoom.query.all()):
         classes[one.class_name] = [
             dict(class_link = one.class_link,
-                 start_time = add_time(one.start_time)
+                 start_time = add_time(one.start_time),
+                 done=one.done
                  )
         ]
     return jsonify(classes)
 
-@app.route('/done', methods=["POST"])
+@app.route('/done', methods=["GET","POST"])
 def done():
     class_name = request.args.get('className', None)
     if class_name:

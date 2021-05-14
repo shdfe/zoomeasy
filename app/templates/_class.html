@@ -17,6 +17,13 @@
         margin: 10px 0;
     }
 
+    .red {
+        background-color: rgb(170, 0, 0);
+    }
+    .green {
+        background-color: green;
+    }
+
     b {
         font-weight: bold;
     }
@@ -31,12 +38,22 @@
         padding-top: 10px;
     }
 </style>
+{% if class.done == True %}
+    <div class="card green">
 
-<div class="card">
-
-    <div class="container">
-        <h4><b>{{ class.class_name }}</b></h4>
-        <a style="margin-top: 5px;" href={{ class.class_link }}>Class Link</a>
-        <h5>Starting Date and Time: {{ class.start_time.month }}/{{ class.start_time.day }}/{{ class.start_time.year }}, {{ class.start_time.strftime("%H:%M %p") }}</h5><!--add time later-->
+        <div class="container">
+            <h4><b>{{ class.class_name }}</b></h4>
+            <a style="margin-top: 5px;" href={{ class.class_link }}>Class Link</a>
+            <h5>Starting Date and Time: {{ class.start_time.month }}/{{ class.start_time.day }}/{{ class.start_time.year }}, {{ class.start_time.strftime("%H:%M %p") }}</h5><!--add time later-->
+        </div>
     </div>
-</div>
+{% else %}
+    <div class="card red">
+
+        <div class="container">
+            <h4><b>{{ class.class_name }}</b></h4>
+            <a style="margin-top: 5px;" href={{ class.class_link }}>Class Link</a>
+            <h5>Starting Date and Time: {{ class.start_time.month }}/{{ class.start_time.day }}/{{ class.start_time.year }}, {{ class.start_time.strftime("%H:%M %p") }}</h5><!--add time later-->
+        </div>
+    </div>
+{% endif %}
