@@ -51,7 +51,7 @@
                                     if (closestClass[0]['done'] === false) {
                                         var miwindow = window.open(closestClass[0]['class_link'], "_blank");
                                         var xhttp = new XMLHttpRequest();
-                                        xhttp.open("POST", "/done?", true);
+                                        xhttp.open("POST", "done?", true);
                                         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                                         xhttp.send(`className=${closestClass[0]['done']}`)
                                         break;
